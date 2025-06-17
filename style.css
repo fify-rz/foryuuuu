@@ -1,0 +1,214 @@
+/* Reset & Dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: linear-gradient(to bottom right, #ffd6ec, #ffe8d6, #d6faff);
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+  }
+  
+  /* Tampilan Awal */
+  #container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    z-index: 2;
+    text-align: center;
+  }
+  
+  #judul {
+    font-size: 32px;
+    color: #ff1493;
+    text-shadow: 2px 2px white;
+    margin-bottom: 20px;
+  }
+  
+  #masukBtn {
+    padding: 18px 50px;
+    font-size: 24px;
+    border: none;
+    background: linear-gradient(to right, #f6a0f6, #ff7fbf);
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 0 25px #ffb3dd;
+    transition: transform 0.3s;
+  }
+  
+  #masukBtn:hover {
+    transform: scale(1.1);
+  }
+  
+  #creatorName {
+    margin-top: 24px;
+    font-size: 16px;
+    color: #666;
+    font-weight: bold;
+    font-style: italic;
+    text-shadow: 1px 1px #fff;
+  }
+  
+  /* Zona Emoji & Gambar */
+  #fireZone {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  .emoji, .gambar {
+    position: absolute;
+    animation: spin 6s linear infinite, float 3s ease-in-out infinite, fall linear infinite;
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.9;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+  
+  @keyframes fall {
+    0% {
+      transform: translateY(-100px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(110vh);
+      opacity: 0;
+    }
+  }
+  
+  /* Video Dino Joget di Tengah */
+  #dinoVideo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    max-width: 80vw;
+    border-radius: 16px;
+    box-shadow: 0 0 16px #ff69b4;
+    z-index: 4;
+  }
+  
+  /* Teks Lucu di Bawah Video */
+  #kalimatLucuAktif {
+    position: absolute;
+    top: calc(50% + 180px);
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ff1493;
+    font-size: 22px;
+    font-weight: bold;
+    animation: gerak 4s infinite alternate ease-in-out;
+    text-shadow: 2px 2px #fff;
+    z-index: 5;
+    padding: 8px 16px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+  }
+  
+  @keyframes gerak {
+    0% { transform: translateX(-10px); }
+    100% { transform: translateX(10px); }
+  }
+  
+  /* Tombol Keluar */
+  #keluarBtn {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 14px 36px;
+    font-size: 20px;
+    border: none;
+    background: linear-gradient(to right, #ff7fbf, #f6a0f6);
+    color: white;
+    border-radius: 30px;
+    box-shadow: 0 0 15px #ffb3dd;
+    cursor: pointer;
+    z-index: 5;
+  }
+  
+  /* Watermark Nama Saat Masuk */
+  #watermark {
+    position: fixed;
+    top: 12px;
+    right: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff69b4;
+    text-shadow: 1px 1px white;
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 6px 12px;
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+    display: none;
+    z-index: 10;
+  }
+  
+  /* Efek Portal Berputar */
+  #portalEffect {
+    position: fixed;
+    width: 150px;
+    height: 150px;
+    border: 10px dotted #ff66cc;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    animation: portalSpin 1s ease-out forwards;
+    z-index: 9999;
+  }
+  
+  @keyframes portalSpin {
+    0% {
+      transform: translate(-50%, -50%) scale(0.1) rotate(0deg);
+      opacity: 0.5;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(2.5) rotate(720deg);
+      opacity: 0;
+    }
+  }
+  #nextLevelBtn {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(to right, #99faff, #b3ffcc);
+    color: #333;
+    font-weight: bold;
+    padding: 14px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    box-shadow: 0 0 10px #87e7ff;
+    z-index: 6;
+    transition: transform 0.2s ease;
+  }
+  
+  #nextLevelBtn:hover {
+    transform: translateX(-50%) scale(1.05);
+  }
+  
+  

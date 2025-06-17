@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next Level - MAUNSTERR</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #ffe9f5, #d6faff);
+      font-family: 'Comic Sans MS', cursive;
+      overflow: hidden;
+    }
+    h1 {
+      text-align: center;
+      color: #ff1493;
+      margin-top: 30px;
+      text-shadow: 1px 1px white;
+    }
+    #emojiZone {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .emoji {
+      position: absolute;
+      font-size: 32px;
+      cursor: pointer;
+      user-select: none;
+    }
+    #scoreBoard {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: white;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: bold;
+      color: #ff1493;
+      box-shadow: 0 0 10px #ffb3dd;
+    }
+    .backBtn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: #ffb6e6;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: bold;
+      border: none;
+      box-shadow: 0 0 8px #ff69b4;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎯 Tangkap Dino & Emoji! 🦖</h1>
+  <div id="emojiZone"></div>
+  <div id="scoreBoard">Skor: <span id="score">0</span></div>
+  <a href="index.html" class="backBtn">⬅ Kembali ke Dunia MAUNSTERR</a>
+
+  <!-- Sound klik emoji -->
+  <audio id="gameSound">
+    <source src="game-sound.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const emojiZone = document.getElementById("emojiZone");
+    const scoreDisplay = document.getElementById("score");
+    const gameSound = document.getElementById("gameSound");
+    let score = 0;
+
+    const emojiList = ['🦖', '💥', '🔥', '💖', '😝', '😂', '😨', '😒'];
+
+    function spawnEmoji() {
+      const emoji = document.createElement("div");
+      emoji.classList.add("emoji");
+      emoji.textContent = emojiList[Math.floor(Math.random() * emojiList.length)];
+
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * window.innerHeight;
+      emoji.style.left = `${x}px`;
+      emoji.style.top = `${y}px`;
+
+      emoji.addEventListener("click", () => {
+        emoji.remove();
+        score++;
+        scoreDisplay.textContent = score;
+        gameSound.currentTime = 0; // restart dari awal
+        gameSound.play();
+      });
+
+      emojiZone.appendChild(emoji);
+
+      setTimeout(() => {
+        emoji.remove();
+      }, 3000);
+    }
+
+    setInterval(spawnEmoji, 800);
+  </script>
+</body>
+</html>

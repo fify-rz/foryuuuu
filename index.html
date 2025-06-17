@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MAUNSTERR World</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Halaman Awal -->
+  <div id="container">
+    <h1 id="judul">Welcome to the Dino Chaos World! 🦕</h1>
+    <button id="masukBtn">Masuk ke Dunia MAUNSTERR!!! 🦖</button>
+    <p id="kalimatLucu"></p>
+    <p id="creatorName">Rafly Greza Phantom Sovereign</p>
+  </div>
+
+  <!-- Dunia Dino -->
+  <div id="fireZone"></div>
+  <video id="dinoVideo" autoplay loop muted playsinline style="display: none;">
+    <source src="dino-joget.mp4" type="video/mp4">
+    Browser kamu tidak mendukung video.
+  </video>
+
+  <!-- Tombol keluar -->
+  <button id="keluarBtn" style="display: none;">Keluar dari Dunia MAUNSTERR 🚪</button>
+  <a href="next.html" id="nextLevelBtn">Play Game 🎮</a>
+  <div id="watermark" style="display:none;">Rafly Greza Phantom Sovereign</div>
+
+  <!-- Suara -->
+  <audio id="fireSound" loop>
+    <source src="funny-fire.mp3" type="audio/mpeg">
+    Browser Anda tidak mendukung audio.
+  </audio>
+
+  <audio id="byeSound">
+    <source src="byee.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Script Dinamis -->
+  <script>
+    const masukBtn = document.getElementById('masukBtn');
+    const keluarBtn = document.getElementById('keluarBtn');
+    const container = document.getElementById('container');
+    const fireZone = document.getElementById('fireZone');
+    const fireSound = document.getElementById('fireSound');
+    const byeSound = document.getElementById('byeSound');
+    const kalimatLucu = document.getElementById('kalimatLucu');
+    const watermark = document.getElementById('watermark');
+    const video = document.getElementById('dinoVideo');
+
+    const kalimatRandom = [
+      "RWARRRR 🦖",
+      "Awas ketawa, nanti diseruduk KKKK🐲🤣",
+      "Gemoy detected! Sistem overload! 🧠💥",
+      "Kalo nggak lucu, balik aja ke masa jurassic 🦕🤪",
+      "Maunster detected: Siap meledak 💣🤣",
+      "Dino joget biar kamu senyum CMIWW😎🦕",
+      "Mau lucu? MANDII DULU SONOO!🏃🏼‍♂️🏃🏼‍♂️🏃🏼‍♂️"
+    ];
+
+    let kalimatIndex = 0;
+    let kalimatInterval;
+
+    function tampilkanKalimat(teksElement) {
+      teksElement.textContent = kalimatRandom[kalimatIndex];
+      kalimatIndex = (kalimatIndex + 1) % kalimatRandom.length;
+    }
+
+    masukBtn.addEventListener('click', () => {
+      container.style.display = 'none';
+      fireZone.style.display = 'block';
+      keluarBtn.style.display = 'block';
+      watermark.style.display = 'block';
+      video.style.display = 'block';
+      fireSound.play();
+
+      const teks = document.createElement('div');
+      teks.id = "kalimatLucuAktif";
+      fireZone.appendChild(teks);
+      tampilkanKalimat(teks);
+      kalimatInterval = setInterval(() => tampilkanKalimat(teks), 4000);
+
+      const emojiList = ['🔥', '🥺', '✨', '💖', '😻', '🐳', '🎉', '🎀', '🌈', '🐣', '🦕', '🦖','HAHAH','💗','🌻','🤌🏼'];
+      const imageSrcs = ['jild.jpg', '514d2b04-fc46-4007-9df5-21e63dec4a7f.png'];
+      const jumlahEmoji = 80;
+
+      for (let i = 0; i < jumlahEmoji; i++) {
+        const emoji = document.createElement('div');
+        emoji.textContent = emojiList[Math.floor(Math.random() * emojiList.length)];
+        emoji.classList.add('emoji');
+        emoji.style.fontSize = `${20 + Math.random() * 30}px`;
+        emoji.style.left = Math.random() * window.innerWidth + 'px';
+        emoji.style.top = -Math.random() * 100 + 'px';
+        emoji.style.animationDuration = `${4 + Math.random() * 3}s`;
+        fireZone.appendChild(emoji);
+      }
+
+      for (let j = 0; j < 8; j++) {
+        const img = document.createElement('img');
+        img.src = imageSrcs[Math.floor(Math.random() * imageSrcs.length)];
+        img.classList.add('gambar');
+        const ukuran = 50 + Math.random() * 50;
+        img.style.width = `${ukuran}px`;
+        img.style.left = Math.random() * window.innerWidth + 'px';
+        img.style.top = -Math.random() * 150 + 'px';
+        img.style.animationDuration = `${5 + Math.random() * 4}s`;
+        fireZone.appendChild(img);
+      }
+    });
+
+    keluarBtn.addEventListener('click', () => {
+      fireSound.pause();
+      fireSound.currentTime = 0;
+      clearInterval(kalimatInterval);
+      fireZone.innerHTML = "";
+      fireZone.style.display = 'none';
+      keluarBtn.style.display = 'none';
+      container.style.display = 'flex';
+      watermark.style.display = 'none';
+      video.style.display = 'none';
+
+      if (byeSound) byeSound.play();
+
+      const portal = document.createElement('div');
+      portal.id = "portalEffect";
+      document.body.appendChild(portal);
+      setTimeout(() => portal.remove(), 1000);
+    });
+  </script>
+
+</body>
+</html>
